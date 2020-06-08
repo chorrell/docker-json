@@ -1,4 +1,4 @@
-FROM node:12-alpine3.11
+FROM node:12-alpine
 
 RUN set -ex \
     && npm install -g json
