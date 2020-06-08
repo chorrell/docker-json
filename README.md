@@ -14,14 +14,24 @@ docker build -t json .
 
 Now use the image to call json with `docker run -i --rm json`:
 
+Version check:
+
+```sh
+docker run -i --rm json
+```
+
+Grouping:
+
 ```sh
 echo '{"a":1}
 {"b": 2}' | docker run -i --rm json -g
 ```
 
+Itemizing:
+
 ```sh
 echo '[{"name":"trent","age":38},
-         {"name":"ewan","age":4}]' | json -a name age
+         {"name":"ewan","age":4}]' | docker run -i --rm json -a name age
 ```
 
 ## Make it easier with an alias
