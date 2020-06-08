@@ -28,4 +28,6 @@ echo '[{"name":"trent","age":38},
 
 Add this to your `.bashrc` or `.zshrc` file:
 
+```bash
 alias json='docker run -i --rm json'
+```
