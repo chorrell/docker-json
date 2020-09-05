@@ -42,18 +42,18 @@ Add this to your `.bashrc` or `.zshrc` file:
 alias json='docker run -i --rm json'
 ```
 
-## Using the GitHub docker image package
+## Using the GitHub Container Registry image
 
-The lateset version of this image is published to GitHub packages. You can use it like this:
+The lateset version of this image is published to the GitHub Container Registry. You can use it like this:
 
 ```sh
-docker pull docker.pkg.github.com/chorrell/docker-json/json
+docker pull ghcr.io/chorrell/json:latest
 
-docker run -i --rm docker.pkg.github.com/chorrell/docker-json/json
+docker run -i --rm ghcr.io/chorrell/json:latest
 ```
 
 And setup an alias like this:
 
 ```bash
-alias json='docker run -i --rm docker.pkg.github.com/chorrell/docker-json/json'
+alias json='docker run -i --rm ghcr.io/chorrell/json:latest'
 ```
