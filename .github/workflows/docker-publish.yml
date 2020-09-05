@@ -15,6 +15,7 @@ on:
 
 env:
   IMAGE_NAME: json
+  MAJOR_VERSION: 10
 
 jobs:
   test:
@@ -40,7 +41,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg MAJOR_VERSION=$MAJOR_VERSION
 
       - name: Log into registry
         run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
@@ -65,4 +66,6 @@ jobs:
           echo VERSION=$VERSION
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$MAJOR_VERSION
           docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$MAJOR_VERSION
