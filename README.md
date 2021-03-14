@@ -4,7 +4,7 @@ A docker image for json: [http://trentm.com/json/]
 
 ## Usage with Docker run
 
-Use this Docker image from the comamnd line in the same way you would with json.
+Use this Docker image from the command line in the same way you would with json.
 
 First build the image:
 
