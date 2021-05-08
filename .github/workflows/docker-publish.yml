@@ -17,13 +17,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
       - name: Build
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
-      - name: Test
-        run: cat test.json | docker run -i --rm $IMAGE_NAME -ag name value
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: MAJOR_VERSION=${{ env.MAJOR_VERSION }}
+          load: true
+          tags: ${{ env.IMAGE_NAME }}
 
-  # Push image to GitHub Container Registry
-  # See also https://docs.docker.com/docker-hub/builds/
+      - name: Test
+        run: cat test.json | docker run -i --rm ${{ env.IMAGE_NAME }} -ag name value
+
   push:
     # Ensure test job passes before pushing image.
     needs: test
@@ -34,8 +39,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg MAJOR_VERSION=$MAJOR_VERSION
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -44,18 +52,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
 
-      - name: Push image
-        run: |
-          IMAGE_ID=ghcr.io/$GITHUB_ACTOR/$IMAGE_NAME
-          
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          echo IMAGE_ID=$IMAGE_ID
-
-          docker tag $IMAGE_NAME $IMAGE_ID:$MAJOR_VERSION
-          docker tag $IMAGE_NAME $IMAGE_ID:latest
-          
-          docker push $IMAGE_ID:$MAJOR_VERSION
-          docker push $IMAGE_ID:latest
-          
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          build-args: MAJOR_VERSION=${{ env.MAJOR_VERSION }}
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.MAJOR_VERSION }}
+            ghcr.io/${{ env.GITHUB_ACTOR }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.GITHUB_ACTOR }}/${{ env.IMAGE_NAME }}:${{ env.MAJOR_VERSION }}
