@@ -61,5 +61,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.MAJOR_VERSION }}
-            ghcr.io/${{ env.GITHUB_ACTOR }}/${{ env.IMAGE_NAME }}:latest
-            ghcr.io/${{ env.GITHUB_ACTOR }}/${{ env.IMAGE_NAME }}:${{ env.MAJOR_VERSION }}
+            ghcr.io/${GITHUB_ACTOR}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${GITHUB_ACTOR}/${{ env.IMAGE_NAME }}:${{ env.MAJOR_VERSION }}
