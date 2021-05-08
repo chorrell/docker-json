@@ -1,5 +1,7 @@
 FROM node:16-alpine
 
+LABEL org.opencontainers.image.source https://github.com/chorrell/docker-json
+
 ARG MAJOR_VERSION=10
 
 RUN set -ex \
