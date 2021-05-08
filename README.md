@@ -1,5 +1,7 @@
 # docker-json
 
+[![Docker](https://github.com/chorrell/docker-json/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/chorrell/docker-json/actions/workflows/docker-publish.yml)
+
 A docker image for json: [http://trentm.com/json/]
 
 ## Usage with Docker run
