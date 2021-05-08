@@ -9,7 +9,7 @@ on:
 
 env:
   IMAGE_NAME: json
-  MAJOR_VERSION: 10
+  MAJOR_VERSION: 11
 
 jobs:
   test:
