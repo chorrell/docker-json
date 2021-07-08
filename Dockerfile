@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine3.13
 
 LABEL org.opencontainers.image.source https://github.com/chorrell/docker-json
 
