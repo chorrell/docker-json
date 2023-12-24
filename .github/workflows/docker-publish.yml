@@ -73,5 +73,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: MAJOR_VERSION=${{ env.MAJOR_VERSION }}
           push: true
+          provenance: mode=max
+          sbom: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
