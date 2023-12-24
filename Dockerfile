@@ -1,5 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1.4.0
-FROM node:21-alpine3.18
+FROM node:21-alpine3.19
 
 LABEL org.opencontainers.image.source https://github.com/chorrell/docker-json
 
