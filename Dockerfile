@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:lts-alpine3.21
+FROM node:lts-alpine3.23
 
 LABEL org.opencontainers.image.source=https://github.com/chorrell/docker-json
 
