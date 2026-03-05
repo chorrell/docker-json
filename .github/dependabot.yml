@@ -23,5 +23,5 @@ updates:
     pull-request-branch-name:
       separator: "/"
     commit-message:
-      prefix: "chore"
+      prefix: "docker"
       include: "scope"
