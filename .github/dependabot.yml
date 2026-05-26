@@ -7,6 +7,8 @@ updates:
       day: "monday"
       time: "09:30"
       timezone: "America/Toronto"
+    cooldown:
+      default-days: 7
     pull-request-branch-name:
       separator: "/"
     commit-message:
@@ -20,6 +22,8 @@ updates:
       day: "monday"
       time: "09:45"
       timezone: "America/Toronto"
+    cooldown:
+      default-days: 7
     pull-request-branch-name:
       separator: "/"
     commit-message:
