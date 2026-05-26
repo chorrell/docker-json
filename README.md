@@ -60,7 +60,6 @@ And setup an alias like this:
 alias json='docker run -i --rm chorrell/json:latest'
 ```
 
-
 ## Using the GitHub Container Registry image
 
 The lateset version of this image is published to the GitHub Container Registry. You can use it like this:
