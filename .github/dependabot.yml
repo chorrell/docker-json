@@ -3,9 +3,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:30"
+      interval: "daily"
       timezone: "America/Toronto"
     cooldown:
       default-days: 7
@@ -18,9 +16,7 @@ updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:45"
+      interval: "daily"
       timezone: "America/Toronto"
     cooldown:
       default-days: 7
@@ -33,9 +29,7 @@ updates:
   - package-ecosystem: "pre-commit"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "10:00"
+      interval: "daily"
       timezone: "America/Toronto"
     cooldown:
       default-days: 7
