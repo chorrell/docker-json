@@ -9,7 +9,7 @@ RUN set -ex \
     && npm install -g json@^$MAJOR_VERSION.0.0
 
 # Minimal runtime stage - use alpine base and copy only Node binary
-FROM alpine:3.24.0
+FROM alpine:3.24.1
 
 LABEL org.opencontainers.image.source=https://github.com/chorrell/docker-json
 
