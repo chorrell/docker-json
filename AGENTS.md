@@ -75,7 +75,7 @@ npx markdownlint-cli2 <file>
 
 ### Dockerfile Best Practices
 
-- Use specific version tags for base images (e.g., `node:lts-alpine3.23`, `alpine:3.23`)
+- Use specific version tags for base images (e.g., `node:lts-alpine3.23`, `alpine:3.24.1`)
 - Use multi-stage builds to minimize final image size
 - Use `--no-cache` flag when appropriate to reduce layer size
 - Place frequently changed layers at the bottom of the Dockerfile
