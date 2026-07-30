@@ -3,21 +3,11 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-      timezone: "America/Toronto"
+      interval: "monthly"
     groups:
-      github-official:
+      monthly-batch:
         patterns:
-          - "actions/*"
-        update-types:
-          - "minor"
-          - "patch"
-      docker:
-        patterns:
-          - "docker/*"
-        update-types:
-          - "minor"
-          - "patch"
+          - "*"
     cooldown:
       default-days: 7
     pull-request-branch-name:
@@ -29,8 +19,11 @@ updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "daily"
-      timezone: "America/Toronto"
+      interval: "monthly"
+    groups:
+      monthly-batch:
+        patterns:
+          - "*"
     cooldown:
       default-days: 7
     pull-request-branch-name:
@@ -42,7 +35,11 @@ updates:
   - package-ecosystem: "pre-commit"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      monthly-batch:
+        patterns:
+          - "*"
     cooldown:
       default-days: 7
     pull-request-branch-name:
