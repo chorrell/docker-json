@@ -111,11 +111,11 @@ npx markdownlint-cli2 <file>
 
 ### Version Management
 
-- Maintain version in one place: `MAJOR_VERSION` env var in workflow
-- Use build args to pass version to Dockerfile:
-  `--build-arg MAJOR_VERSION=${{ env.MAJOR_VERSION }}`
+- The workflow passes the version to the Dockerfile as a build arg
+  (`build-args: MAJOR_VERSION=11`) and publishes it as an image tag (`tags: "11"`)
 - Update version in these locations:
-  - `.github/workflows/docker-publish.yml` (MAJOR_VERSION env var)
+  - `.github/workflows/docker-publish.yml` (both `build-args` and `tags`; the
+    reusable-workflow call can't read a workflow `env` var)
   - Dockerfile (ARG default)
 
 ## Project Structure
@@ -135,17 +135,21 @@ npx markdownlint-cli2 <file>
 
 ## CI/CD Pipeline
 
-The GitHub Actions workflow (`docker-publish.yml`):
+The GitHub Actions workflow (`docker-publish.yml`) calls the shared
+[chorrell/workflows](https://github.com/chorrell/workflows) `docker-publish` workflow:
 
-1. **Test job**: Builds image and runs test against `test.json`
-2. **Push job**: Runs after test passes, pushes to Docker Hub and GHCR
+1. **Test jobs** (`docker / test (linux/amd64)`, `docker / test (linux/arm64)`): build
+   the image per platform and run it against `test.json`
+2. **Push job** (`docker / push`): on `main`, pushes to Docker Hub and GHCR and
+   attests build provenance in both
 
-### Workflow Environment Variables
+### Workflow Inputs
 
-| Variable      | Value | Description                          |
-|---------------|-------|--------------------------------------|
-| IMAGE_NAME    | json  | Image name                           |
-| MAJOR_VERSION | 11    | Major version for json package       |
+| Input        | Value            | Description                    |
+|--------------|------------------|--------------------------------|
+| image-name   | json             | Image name                     |
+| build-args   | MAJOR_VERSION=11 | Major version for json package |
+| tags         | 11               | Published version tag          |
 
 ## Security Considerations
 
@@ -159,7 +163,7 @@ The GitHub Actions workflow (`docker-publish.yml`):
 
 ### Update Node.js Version
 
-1. Update `MAJOR_VERSION` in `.github/workflows/docker-publish.yml`
+1. Update the version in `.github/workflows/docker-publish.yml` (`build-args` and `tags`)
 2. Update base image tags in Dockerfile (e.g., `node:lts-alpine3.23` -> `node:lts-alpine3.24`)
 3. Update Alpine version if needed
 
