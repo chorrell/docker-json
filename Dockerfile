@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 
 # Build stage - install dependencies
-FROM node:lts-alpine3.23 AS builder
+# (keep the Alpine release in step with the runtime stage's alpine tag)
+FROM node:lts-alpine3.24 AS builder
 
 ARG MAJOR_VERSION=11
 
