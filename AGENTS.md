@@ -75,7 +75,7 @@ npx markdownlint-cli2 <file>
 
 ### Dockerfile Best Practices
 
-- Use specific version tags for base images (e.g., `node:lts-alpine3.23`, `alpine:3.24.1`)
+- Use specific version tags for base images (e.g., `node:lts-alpine3.24`, `alpine:3.24.2`)
 - Use multi-stage builds to minimize final image size
 - Use `--no-cache` flag when appropriate to reduce layer size
 - Place frequently changed layers at the bottom of the Dockerfile
@@ -164,8 +164,11 @@ The GitHub Actions workflow (`docker-publish.yml`) calls the shared
 ### Update Node.js Version
 
 1. Update the version in `.github/workflows/docker-publish.yml` (`build-args` and `tags`)
-2. Update base image tags in Dockerfile (e.g., `node:lts-alpine3.23` -> `node:lts-alpine3.24`)
-3. Update Alpine version if needed
+2. Update base image tags in Dockerfile (e.g., `node:lts-alpine3.24` -> `node:lts-alpine3.25`)
+3. Keep the builder's Alpine release the same as the runtime `alpine` tag's
+   (e.g., `node:lts-alpine3.25` with `alpine:3.25.x`): the runtime stage
+   installs node's shared libraries with apk, and Dependabot won't change the
+   `alpine3.x` suffix of the node tag
 
 ### Add New JSON Test Case
 
